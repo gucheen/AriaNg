@@ -51,37 +51,37 @@ gulp.task('html', ['styles', 'scripts', 'views'], function () {
         .pipe($.if(['js/plugins.min.js', 'js/aria-ng.min.js', 'css/plugins.min.css', 'css/aria-ng.min.css'], $.rev()))
         .pipe($.if('*.html', $.htmlmin({collapseWhitespace: true})))
         .pipe($.revReplace())
-        .pipe(gulp.dest('../public'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('langs', function () {
     return gulp.src([
         'src/langs/**/*'
-    ]).pipe(gulp.dest('../public/langs'));
+    ]).pipe(gulp.dest('dist/langs'));
 });
 
 gulp.task('images', function () {
     return gulp.src([
         'src/imgs/**/*'
-    ]).pipe(gulp.dest('../public/imgs'));
+    ]).pipe(gulp.dest('dist/imgs'));
 });
 
 gulp.task('fonts', function () {
     return gulp.src([
         'node_modules/font-awesome/fonts/fontawesome-webfont.*'
     ]).pipe(gulp.dest('.tmp/fonts'))
-        .pipe(gulp.dest('../public/fonts'));
+        .pipe(gulp.dest('dist/fonts'));
 });
 
 gulp.task('manifest', function () {
     return gulp.src([
-        '../public/css/**',
-        '../public/js/**',
-        '../public/fonts/fontawesome-webfont.woff2',
-        '../public/*.html',
-        '../public/*.ico',
-        '../public/*.png'
-    ], {base: '../public/'})
+        'dist/css/**',
+        'dist/js/**',
+        'dist/fonts/fontawesome-webfont.woff2',
+        'dist/*.html',
+        'dist/*.ico',
+        'dist/*.png'
+    ], {base: 'dist/'})
         .pipe($.manifest({
             hash: true,
             preferOnline: true,
@@ -89,7 +89,7 @@ gulp.task('manifest', function () {
             filename: 'index.manifest',
             exclude: 'index.manifest'
         }))
-        .pipe(gulp.dest('../public'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('extras', function () {
@@ -99,10 +99,10 @@ gulp.task('extras', function () {
         '!src/*.html'
     ], {
         dot: true
-    }).pipe(gulp.dest('../public'));
+    }).pipe(gulp.dest('dist'));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', '../public']));
+gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', ['styles', 'scripts', 'fonts'], function () {
     browserSync({
@@ -136,14 +136,14 @@ gulp.task('serve:dist', function () {
         notify: false,
         port: 9000,
         server: {
-            baseDir: ['../public']
+            baseDir: ['dist']
         }
     });
 });
 
 gulp.task('info', function () {
     return gulp.src([
-        '../public/**/*'
+        'dist/**/*'
     ]).pipe($.size({title: 'build', gzip: true}));
 });
 
