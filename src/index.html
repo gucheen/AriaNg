@@ -300,6 +300,12 @@
     <ng-setting-dialog setting="quickSettingContext"></ng-setting-dialog>
 </div>
 
+<script>
+    window.nodeRequire = require;
+    delete window.require;
+    delete window.exports;
+    delete window.module;
+</script>
 <!-- build:js js/jquery-3.3.1.min.js -->
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <!-- endbuild -->
