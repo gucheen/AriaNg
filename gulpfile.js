@@ -109,7 +109,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], function () {
         notify: false,
         port: 9000,
         server: {
-            baseDir: ['.tmp', 'src'],
+            baseDir: ['.tmp', 'src', './'],
             routes: {
                 '/node_modules': 'node_modules'
             }
